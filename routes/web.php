@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmpleadoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+
+Route::get('/empleados', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
+
 
 Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+
+Route::get('/reporte-xml', function () {
+    $empleados = App\Models\Empleado::all();
+    return response()->xml(['empleados'=>$empleados->toArray()]);
+    }
+);

@@ -16,10 +16,12 @@ class EmpleadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $empleados = Empleado::paginate();
-
+        $nombre = $request->get('nombre');
+        $empleados = Empleado::orderby('id','DESC')
+            ->where($nombre)
+            ->paginate();
         return view('empleado.index', compact('empleados'))
             ->with('i', (request()->input('page', 1) - 1) * $empleados->perPage());
     }

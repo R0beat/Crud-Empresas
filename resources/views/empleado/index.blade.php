@@ -21,6 +21,11 @@
                                   {{ __('Create New') }}
                                 </a>
                               </div>
+                              <div class="float-right">
+                                <a href="{{ route('/reporte-xml') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
+                                  {{ __('XML') }}
+                                </a>
+                              </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -29,22 +34,27 @@
                         </div>
                     @endif
 
+
                     <div class="card-body">
+                        <div>
+                            <h1>Busqueda por usuarios</h1>
+                            <form action="{{ route('empleados.index')}}" class="form-inline pull-left" method="POST">
+                            <div>   
+                                @csrf
+                                {{ Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre']) }}
+                                <button class="btn btn-primary">buscar</button>
+                            </div>
+                            </form>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        
-										<th>Id Empleado</th>
+                                        <th>No</th>                                  
+										<th>Empresa</th>
+										<th>Departamento</th>
 										<th>Nombre</th>
-										<th>Fecha Nacimiento</th>
-										<th>Correo</th>
-										<th>Sexo</th>
-										<th>Telefono</th>
-										<th>Celular</th>
-										<th>Fecha Ingreso</th>
-										<th>Empresa Id</th>
+					
 
                                         <th></th>
                                     </tr>
@@ -53,17 +63,9 @@
                                     @foreach ($empleados as $empleado)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $empleado->id_empleado }}</td>
+											<td>{{ $empleado->empresa }}</td>
+											<td>{{ $empleado->departamento }}</td>
 											<td>{{ $empleado->nombre }}</td>
-											<td>{{ $empleado->fecha_nacimiento }}</td>
-											<td>{{ $empleado->correo }}</td>
-											<td>{{ $empleado->sexo }}</td>
-											<td>{{ $empleado->telefono }}</td>
-											<td>{{ $empleado->celular }}</td>
-											<td>{{ $empleado->fecha_ingreso }}</td>
-											<td>{{ $empleado->empresa_id }}</td>
-
                                             <td>
                                                 <form action="{{ route('empleados.destroy',$empleado->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('empleados.show',$empleado->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>

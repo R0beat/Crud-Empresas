@@ -19,10 +19,13 @@
                     </div>
 
                     <div class="card-body">
-                        
                         <div class="form-group">
-                            <strong>Id Empleado:</strong>
-                            {{ $empleado->id_empleado }}
+                            <strong>Empresa:</strong>
+                            {{ $empleado->empresa }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Departamento:</strong>
+                            {{ $empleado->departamento }}
                         </div>
                         <div class="form-group">
                             <strong>Nombre:</strong>
@@ -51,10 +54,6 @@
                         <div class="form-group">
                             <strong>Fecha Ingreso:</strong>
                             {{ $empleado->fecha_ingreso }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Empresa Id:</strong>
-                            {{ $empleado->empresa_id }}
                         </div>
 
                     </div>
